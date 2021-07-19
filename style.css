@@ -26,9 +26,9 @@ body {
     background-color: #d4d4d4;
     width: 100%;
     grid-column: 1 / span 4;
-    display: flex;
+    /* display: flex;
     justify-content: flex-end;
-    align-items: flex-start;
+    align-items: flex-start; */
     margin-bottom: 1rem;
 }
 
@@ -54,6 +54,9 @@ button:active {
 #display {
     font-size:2.2rem;
     color: black;
+    text-align: right;
+    word-wrap: break-word;
+    word-break: break-all;
 }
 
 #clear {

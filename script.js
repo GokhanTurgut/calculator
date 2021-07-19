@@ -1,4 +1,5 @@
 // Getting elements from the HTML file.
+
 const display = document.getElementById('display');
 const deleteBtn = document.getElementById('delete');
 const clearBtn = document.getElementById('clear');
@@ -21,6 +22,10 @@ const dotBtn = document.getElementById('dot');
 
 // Writing numbers on the display screen.
 
+window.addEventListener('keydown', (e) => {
+    console.log(e);
+})
+    
 oneBtn.addEventListener('click', () => {
     writeNumber('1');
 })
@@ -56,6 +61,75 @@ dotBtn.addEventListener('click', () => {
     dotBtn.disabled = true;
 })
 
+// Keyboard support.
+
+for (i = 0; i < 10; i++) {
+    keyboardSupport(`${i}`);
+}
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == '.' && dotBtn.disabled == false) {
+        writeNumber('.');
+        dotBtn.disabled = true;
+    }
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == 'Backspace') {
+        display.textContent = display.textContent.slice(0, -1);
+    }
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == '+') {
+        if (operationStatus === false) {
+            firstOperation('+');
+        }
+        else if (operationStatus === true) {
+            getResult('+');
+        }
+    }
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == '-') {
+        if (operationStatus === false) {
+            firstOperation('-');
+        }
+        else if (operationStatus === true) {
+            getResult('-');
+        }
+    }
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == '*') {
+        if (operationStatus === false) {
+            firstOperation('x');
+        }
+        else if (operationStatus === true) {
+            getResult('x');
+        }
+    }
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == '/') {
+        if (operationStatus === false) {
+            firstOperation('÷');
+        }
+        else if (operationStatus === true) {
+            getResult('÷');
+        }
+    }
+})
+
+window.addEventListener('keydown', (e) => {
+    if (e.key == '=') {
+        getResult();
+        operationStatus = false;
+    }
+})
 
 // Clear and Delete button functionality.
 
@@ -63,7 +137,7 @@ clearBtn.addEventListener('click', () => {
     clear();
 })
 deleteBtn.addEventListener('click', () => {
-    display.textContent = display.textContent.slice(0, -1)
+    display.textContent = display.textContent.slice(0, -1);
 })
 
 let currentNumber;
@@ -173,4 +247,12 @@ function getResult (operation) {
     shouldClear = true;
     dotBtn.disabled = false;
     operationType = operation;
+}
+
+function keyboardSupport(key) {
+    window.addEventListener('keydown', (e) => {
+        if (e.key == key) {
+            writeNumber(key);
+        }
+    })
 }
