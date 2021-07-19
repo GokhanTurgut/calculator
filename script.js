@@ -17,6 +17,7 @@ const sevenBtn = document.getElementById('seven');
 const eightBtn = document.getElementById('eight');
 const nineBtn = document.getElementById('nine');
 const zeroBtn = document.getElementById('zero');
+const dotBtn = document.getElementById('dot');
 
 // Writing numbers on the display screen.
 
@@ -50,6 +51,11 @@ nineBtn.addEventListener('click', () => {
 zeroBtn.addEventListener('click', () => {
     writeNumber('0');
 })
+dotBtn.addEventListener('click', () => {
+    writeNumber('.');
+    dotBtn.disabled = true;
+})
+
 
 // Clear and Delete button functionality.
 
@@ -134,6 +140,7 @@ function clear() {
     currentNumber = undefined;
     operationType = undefined;
     operationStatus = false;
+    dotBtn.disabled = false;
 }
 
 function writeNumber(number) {
@@ -152,6 +159,7 @@ function firstOperation (operation) {
     previousNumber = parseFloat(previousNumber);
     shouldClear = true;
     operationStatus = true;
+    dotBtn.disabled = false;
     operationType = operation;
 }
 
@@ -163,5 +171,6 @@ function getResult (operation) {
     previousNumber = display.textContent;
     previousNumber = parseFloat(previousNumber);
     shouldClear = true;
+    dotBtn.disabled = false;
     operationType = operation;
 }

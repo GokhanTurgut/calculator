@@ -2,8 +2,88 @@ body {
     min-height: 100vh;
     margin: 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-
+    font-family: 'Orbitron', sans-serif;
+    background: #0d1117
 }
 
+.calculator {
+    background-color: black;
+    height: 30rem;
+    width: 25rem;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 1.5fr repeat(5, 1fr);
+    gap: 5px;
+    padding: 1rem;
+    border: solid 1rem #d4d4d4;
+    border-radius: .5rem;
+}
+
+.displayContainer {
+    background-color: #d4d4d4;
+    width: 100%;
+    grid-column: 1 / span 4;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.githubLink {
+    margin-top: 3rem;
+    font-size: 2rem;
+    text-decoration: none;
+    color: white;
+}
+
+button {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2.2rem;
+    color: rgb(20, 20, 20);
+    background-color: #d4d4d4;
+    border: none;
+}
+
+button:active {
+    transform: translateY(.15rem);
+}
+
+#display {
+    font-size:2.2rem;
+    color: black;
+}
+
+#clear {
+    grid-column: 1 / span 2;
+}
+
+#clear:hover {
+    background-color: #9e2e2e;
+}
+
+#delete:hover {
+    background-color: #ff8742;
+}
+
+#zero {
+    grid-column: 1 / span 2;
+}
+
+#equal:hover {
+    background-color: #33d491;
+}
+
+#dot:hover {
+    background-color: #6c6bc9;
+}
+
+.operator:hover {
+    background-color: #ffd152;
+}
+
+.number:hover {
+    background-color: #6bc3c9;
+}
