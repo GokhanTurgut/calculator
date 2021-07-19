@@ -21,34 +21,34 @@ const zeroBtn = document.getElementById('zero');
 // Writing numbers on the display screen.
 
 oneBtn.addEventListener('click', () => {
-    display.textContent += '1';
+    writeNumber('1');
 })
 twoBtn.addEventListener('click', () => {
-    display.textContent += '2';
+    writeNumber('2');
 })
 threeBtn.addEventListener('click', () => {
-    display.textContent += '3';
+    writeNumber('3');
 })
 fourBtn.addEventListener('click', () => {
-    display.textContent += '4';
+    writeNumber('4');
 })
 fiveBtn.addEventListener('click', () => {
-    display.textContent += '5';
+    writeNumber('5');
 })
 sixBtn.addEventListener('click', () => {
-    display.textContent += '6';
+    writeNumber('6');
 })
 sevenBtn.addEventListener('click', () => {
-    display.textContent += '7';
+    writeNumber('7');
 })
 eightBtn.addEventListener('click', () => {
-    display.textContent += '8';
+    writeNumber('8');
 })
 nineBtn.addEventListener('click', () => {
-    display.textContent += '9';
+    writeNumber('9');
 })
 zeroBtn.addEventListener('click', () => {
-    display.textContent += '0';
+    writeNumber('0');
 })
 
 // Clear and Delete button functionality.
@@ -64,27 +64,48 @@ let currentNumber;
 let previousNumber;
 let total;
 let operationType;
+let shouldClear = false;
+let operationStatus = false;
 
 plusBtn.addEventListener('click', () => {
-    if (previousNumber === undefined) {
-        previousNumber = display.textContent;
-        previousNumber = parseFloat(previousNumber);
-        operationType = '+';
-        display.textContent = '';
+    if (operationStatus === false) {
+        firstOperation('+');
     }
-    else {
-        currentNumber = display.textContent;
-        currentNumber = parseFloat(currentNumber);
-        total = previousNumber + currentNumber;
-        display.textContent = `${total}`;
+    else if (operationStatus === true) {
+        getResult('+');
+    }
+})
+
+minusBtn.addEventListener('click', () => {
+    if (operationStatus === false) {
+        firstOperation('-');
+    }
+    else if (operationStatus === true) {
+        getResult('-');
+    }
+})
+
+multiplyBtn.addEventListener('click', () => {
+    if (operationStatus === false) {
+        firstOperation('x');
+    }
+    else if (operationStatus === true) {
+        getResult('x');
+    }
+})
+
+divideBtn.addEventListener('click', () => {
+    if (operationStatus === false) {
+        firstOperation('÷');
+    }
+    else if (operationStatus === true) {
+        getResult('÷');
     }
 })
 
 equalBtn.addEventListener('click', () => {
-    currentNumber = display.textContent;
-    currentNumber = parseFloat(currentNumber);
-    total = operate(previousNumber, currentNumber, operationType);
-    display.textContent = `${total}`;
+    getResult();
+    operationStatus = false;
 })
 
 function operate(firstNumber, secondNumber, operation) {
@@ -107,10 +128,40 @@ function operate(firstNumber, secondNumber, operation) {
     }
 }
 
-
 function clear() {
     display.textContent = '';
     previousNumber = undefined;
     currentNumber = undefined;
     operationType = undefined;
+    operationStatus = false;
+}
+
+function writeNumber(number) {
+    if (shouldClear === true) {
+        display.textContent = '';
+        shouldClear = false;
+        display.textContent += number;
+    }
+    else if (shouldClear === false) {
+        display.textContent += number;
+    }
+}
+
+function firstOperation (operation) {
+    previousNumber = display.textContent;
+    previousNumber = parseFloat(previousNumber);
+    shouldClear = true;
+    operationStatus = true;
+    operationType = operation;
+}
+
+function getResult (operation) {
+    currentNumber = display.textContent;
+    currentNumber = parseFloat(currentNumber);
+    total = operate(previousNumber, currentNumber, operationType);
+    display.textContent = `${total}`;
+    previousNumber = display.textContent;
+    previousNumber = parseFloat(previousNumber);
+    shouldClear = true;
+    operationType = operation;
 }
